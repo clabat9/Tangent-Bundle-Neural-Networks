@@ -5,7 +5,7 @@ This repo contains the code used for implementing the numerical results in the p
 
 C. Battiloro, Z. Wang, H. Riess, A. Ribeiro, P. Di Lorenzo
 
-![alt text](https://ibb.co/vvDc165)
+![alt text](https://www.google.com/url?sa=i&url=https%3A%2F%2Fmedium.com%2Fintuition%2Fwhat-the-heck-is-a-manifold-60b8750e9690&psig=AOvVaw07ply7qzTvlGbUeJRHouvA&ust=1666299087836000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCIjhvf6V7foCFQAAAAAdAAAAABAD)
 
 The data are generated via the Matlab script VecDiffMap.m, in which is possible to select the number of sampling points on the sphere, the number of sampling realizations and the number of noise realizations; the ouput files are saved in "~/VectorDiffusionMaps-master/data". We use the implementation of the Vector Diffusion Map algorithm from trgao10 (https://github.com/trgao10/VectorDiffusionMaps) that is based on the original implementation of the VDM paper [] author Hau-Tieng Wu; we plan to implement the VDM procedure in Python for the extension of this conference paper to have a better control e better computational performance.
 
