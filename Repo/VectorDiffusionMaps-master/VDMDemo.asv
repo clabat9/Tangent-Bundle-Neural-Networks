@@ -1,0 +1,109 @@
+clearvars
+close all
+path(pathdef);
+path(path, genpath([pwd '/utils/']));
+% set parameters
+Nb = 200;
+n_real = 10;
+sigma_noise_coll = [5e-3,1e-2,5e-2,1e-1,5e-1];
+n_noise_real = 30;
+add_noise = 1;
+savevars = 1;
+for rel = 1:n_real
+    % Sample 2-sphere
+    rng('shuffle');
+    BaseManifold = randn(3, Nb);
+    norm_BM = sqrt(sum(BaseManifold.^2));
+    BaseManifold = BaseManifold * diag(1./norm_BM);
+    
+    
+    % Synthetic Data on Sphere
+    X = BaseManifold(1,:);
+    Y = BaseManifold(2,:);
+    Z = BaseManifold(3,:);
+    
+    % Sin/Cos VF
+    % U = cos(BaseManifold(1,:)+BaseManifold(2,:)*exp(BaseManifold(3,:));
+    % V = sin(BaseManifold(1,:)-BaseManifold(2,:)+BaseManifold(3,:));
+    % W = sin(BaseManifold(1,:)+BaseManifold(2,:)-BaseManifold(3,:));
+    
+    % Exp Vec Field
+    % U = -BaseManifold(2,:).*BaseManifold(3,:).*exp(-BaseManifold(2,:).*BaseManifold(2,:));
+    % V = -BaseManifold(1,:).*BaseManifold(3,:).*exp(-BaseManifold(2,:).*BaseManifold(2,:));
+    % W = exp(-BaseManifold(2,:).*BaseManifold(2,:));
+    
+    % Smooth Vec Field
+    U = -BaseManifold(2,:);
+    V = BaseManifold(1,:);
+    W = zeros(1,Nb);
+    
+    
+    data = [U;V;W];
+    
+%     quiver3(X,Y,Z,U,V,W, 'LineWidth',3); hold on;
+%     scatter3(BaseManifold(1,:), BaseManifold(2,:), BaseManifold(3,:), 2, 'red', 'filled');
+%     axis equal
+%     set(gcf, 'ToolBar', 'none');
+%     cameratoolbar;
+%     cameratoolbar('SetCoordSys', 'none');
+    %% Diffusion Maps
+    dm.data 	   = BaseManifold;
+    dm.epsilon     = .1;
+    dm.NN    	   = Nb;
+    dm.T     	   = 1;
+    dm.delta 	   = 0.7;
+    dm.symmetrize  = 1;
+    dm.embedmaxdim = 50;
+    dm.Nabla2 = 1;
+    % [rsltDM] = DiffMap(dm);
+    
+    %% Vector Diffusion Maps
+    vdm = dm;
+    vdm.embedmaxdim = 100;
+    vdm.debug = 1;
+    [rsltDM] = DiffMap(dm);
+    [rsltVDM] = VecDiffMap(vdm);
+    d_hat = size(rsltVDM.pcaBASIS,2);
+    data_proj = zeros(size(data,2)*d_hat,1);
+    data_proj_mat = zeros(d_hat,size(data,2));
+    for point =1:size(data,2)
+        temp = rsltVDM.pcaBASIS(:,:,point)'*data(:,point);
+        data_proj(((point-1)*d_hat+1):(point*d_hat),1) = temp;
+        data_proj_mat(:,point) = temp;
+    end
+    if savevars == 1
+        dir_name = strcat("data/data_samples_",string(Nb),"_realization_",string(rel));
+        mkdir(dir_name)
+        if add_noise
+            for nrel = 1:n_noise_real
+                for sigma = sigma_noise_coll
+                    data_tmp = data + sigma*randn(size(data));
+                    data_proj_tmp = zeros(size(data,2)*d_hat,1);
+                    data_proj_mat_tmp = zeros(d_hat,size(data,2));
+                    for point =1:size(data_tmp,2)
+                        temp = rsltVDM.pcaBASIS(:,:,point)'*data_tmp(:,point);
+                        data_proj_tmp(((point-1)*d_hat+1):(point*d_hat),1) = temp;
+                        data_proj_mat_tmp(:,point) = temp;
+                    end
+                    writematrix(data_proj_tmp,strcat(dir_name,'/projData_sd_',string(sigma),'_nrel_',string(nrel),'.csv')) 
+                    writematrix(data_proj_mat_tmp,strcat(dir_name,'/projDataMat_sd_',string(sigma),'_nrel_',string(nrel),'.csv')) 
+                    writematrix(data_tmp,strcat(dir_name,'/Data_sd_',string(sigma),'_nrel_',string(nrel),'.csv')) 
+                end
+            end
+        end
+        writematrix(data_proj,strcat(dir_name,'/projData.csv')) 
+        writematrix(data_proj_mat,strcat(dir_name,'/projDataMat.csv')) 
+        writematrix(data,strcat(dir_name,'/Data.csv')) 
+        save(strcat(dir_name,'/points.mat'),"BaseManifold")
+        save(strcat(dir_name,'/data_proj.mat'),"data_proj")
+        save(strcat(dir_name,'/data.mat'),"data")
+        save(strcat(dir_name,'/res_vdm.mat'),"rsltVDM")
+        writematrix(rsltVDM.Delta,strcat(dir_name,'/SLaplacian.csv')) 
+        writematrix(rsltVDM.expDelta,strcat(dir_name,'/expSLaplacian.csv')) 
+        writematrix(rsltDM.Laplacian,strcat(dir_name,'/Laplacian.csv')) 
+        writematrix(rsltDM.expLaplacian,strcat(dir_name,'/expLaplacian.csv')) 
+    end
+end
+if rel > 1
+        close all
+end

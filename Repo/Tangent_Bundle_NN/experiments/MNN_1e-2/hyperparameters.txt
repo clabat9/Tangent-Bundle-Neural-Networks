@@ -1,0 +1,728 @@
+2022/10/19 17:19:52
+
+nDataSplits = 5
+optimAlg = ADAM
+learningRate = 0.0005
+beta1 = 0.8
+beta2 = 0.9
+lossFunction = <class 'alegnnss.modules.loss.MSE_semisup'>
+nEpochs = 5000
+batchSize = 1
+doLearningRateDecay = False
+learningRateDecayRate = 0.9
+learningRateDecayPeriod = 1666
+validationInterval = 5
+
+name = MNN
+device = cuda:0
+archit = <class 'alegnnss.modules.architectures.SelectionGNN'>
+dimNodeSignals = [3, 3]
+nFilterTaps = [5]
+bias = False
+poolingFunction = <class 'alegnnss.utils.graphML.NoPool'>
+nSelectedNodes = [200]
+poolingSize = [0]
+dimLayersMLP = []
+GSO = None
+order = None
+lossFunction = <class 'alegnnss.modules.loss.MSE_semisup'>
+trainer = <class 'alegnnss.modules.training.Trainer'>
+evaluator = <function evaluate at 0x7f219da85790>
+nonlinearity = <class 'torch.nn.modules.activation.PReLU'>
+
+doPrint = True
+doLogging = False
+doSaveVars = True
+doFigs = False
+saveDir = experiments/manifoldnn--20221019171952
+printInterval = 16000
+figSize = 5
+lineWidth = 2
+markerShape = o
+markerSize = 3
+
+name = MNN_num_sampl_200_data_real_0_noise_real_0
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_0_noise_real_1
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_0_noise_real_2
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_0_noise_real_3
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_0_noise_real_4
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_1_noise_real_0
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_1_noise_real_1
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_1_noise_real_2
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_1_noise_real_3
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_1_noise_real_4
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_2_noise_real_0
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_2_noise_real_1
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_2_noise_real_2
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_2_noise_real_3
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_2_noise_real_4
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_3_noise_real_0
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_3_noise_real_1
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_3_noise_real_2
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_3_noise_real_3
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_3_noise_real_4
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_4_noise_real_0
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_4_noise_real_1
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_4_noise_real_2
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_4_noise_real_3
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_200_data_real_4_noise_real_4
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+nDataSplits = 5
+optimAlg = ADAM
+learningRate = 0.0005
+beta1 = 0.8
+beta2 = 0.9
+lossFunction = <class 'alegnnss.modules.loss.MSE_semisup'>
+nEpochs = 5000
+batchSize = 1
+doLearningRateDecay = False
+learningRateDecayRate = 0.9
+learningRateDecayPeriod = 1666
+validationInterval = 5
+
+name = MNN
+device = cuda:0
+archit = <class 'alegnnss.modules.architectures.SelectionGNN'>
+dimNodeSignals = [3, 3]
+nFilterTaps = [5]
+bias = False
+poolingFunction = <class 'alegnnss.utils.graphML.NoPool'>
+nSelectedNodes = [800]
+poolingSize = [0]
+dimLayersMLP = []
+GSO = None
+order = None
+lossFunction = <class 'alegnnss.modules.loss.MSE_semisup'>
+trainer = <class 'alegnnss.modules.training.Trainer'>
+evaluator = <function evaluate at 0x7f219da85790>
+nonlinearity = <class 'torch.nn.modules.activation.PReLU'>
+
+doPrint = True
+doLogging = False
+doSaveVars = True
+doFigs = False
+saveDir = experiments/manifoldnn--20221019171952
+printInterval = 16000
+figSize = 5
+lineWidth = 2
+markerShape = o
+markerSize = 3
+
+name = MNN_num_sampl_800_data_real_0_noise_real_0
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_0_noise_real_1
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_0_noise_real_2
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_0_noise_real_3
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_0_noise_real_4
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_1_noise_real_0
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_1_noise_real_1
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_1_noise_real_2
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_1_noise_real_3
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_1_noise_real_4
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_2_noise_real_0
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_2_noise_real_1
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_2_noise_real_2
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_2_noise_real_3
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_2_noise_real_4
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_3_noise_real_0
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_3_noise_real_1
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_3_noise_real_2
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_3_noise_real_3
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_3_noise_real_4
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_4_noise_real_0
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_4_noise_real_1
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_4_noise_real_2
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_4_noise_real_3
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_800_data_real_4_noise_real_4
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+nDataSplits = 5
+optimAlg = ADAM
+learningRate = 0.0005
+beta1 = 0.8
+beta2 = 0.9
+lossFunction = <class 'alegnnss.modules.loss.MSE_semisup'>
+nEpochs = 5000
+batchSize = 1
+doLearningRateDecay = False
+learningRateDecayRate = 0.9
+learningRateDecayPeriod = 1666
+validationInterval = 5
+
+name = MNN
+device = cuda:0
+archit = <class 'alegnnss.modules.architectures.SelectionGNN'>
+dimNodeSignals = [3, 3]
+nFilterTaps = [5]
+bias = False
+poolingFunction = <class 'alegnnss.utils.graphML.NoPool'>
+nSelectedNodes = [1200]
+poolingSize = [0]
+dimLayersMLP = []
+GSO = None
+order = None
+lossFunction = <class 'alegnnss.modules.loss.MSE_semisup'>
+trainer = <class 'alegnnss.modules.training.Trainer'>
+evaluator = <function evaluate at 0x7f219da85790>
+nonlinearity = <class 'torch.nn.modules.activation.PReLU'>
+
+doPrint = True
+doLogging = False
+doSaveVars = True
+doFigs = False
+saveDir = experiments/manifoldnn--20221019171952
+printInterval = 16000
+figSize = 5
+lineWidth = 2
+markerShape = o
+markerSize = 3
+
+name = MNN_num_sampl_1200_data_real_0_noise_real_0
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_0_noise_real_1
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_0_noise_real_2
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_0_noise_real_3
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_0_noise_real_4
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_1_noise_real_0
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_1_noise_real_1
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_1_noise_real_2
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_1_noise_real_3
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_1_noise_real_4
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_2_noise_real_0
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_2_noise_real_1
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_2_noise_real_2
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_2_noise_real_3
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_2_noise_real_4
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_3_noise_real_0
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_3_noise_real_1
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_3_noise_real_2
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_3_noise_real_3
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_3_noise_real_4
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_4_noise_real_0
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_4_noise_real_1
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_4_noise_real_2
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_4_noise_real_3
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+name = MNN_num_sampl_1200_data_real_4_noise_real_4
+thisOptimizationAlgorithm = ADAM
+thisTrainer = <class 'alegnnss.modules.training.Trainer'>
+thisEvaluator = <function evaluate at 0x7f219da85790>
+thisLearningRate = 0.0005
+thisBeta1 = 0.8
+thisBeta2 = 0.9
+
+Simulation started: 2022/10/19 17:19:52
+Simulation ended:   2022/10/19 17:31:40
+Total time: 0h 11m 47.57s

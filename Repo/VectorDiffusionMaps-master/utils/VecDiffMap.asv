@@ -1,0 +1,369 @@
+function [rslt] = VecDiffMap(vdm)
+%
+%  Vector Diffusion Map v0.1
+%
+% INPUT:
+%   vdm.data	    : pxn matrix which represents n data points in R^p
+%   vdm.epsilon	    : \epsilon in the VDM
+%   vdm.NN	        : number of nearest neighbors
+%   vdm.T	        : diffusion time
+%   vdm.delta	    : parameter for truncation
+%   vdm.symmetrize  : symmetrize the graph
+%
+% (OPTION)
+%   vdm.debug       : debug mode
+%   vdm.embedmaxdim : largest allowable dimension for embedding
+%                     (embedding is mandatory, according to truncation;
+%                      this option is the upper bound for allowable embeddings)
+%
+% OUTPUT:
+%   rslt.embeddim   : the truncated VDM
+%
+% DEPENDENCE:
+%   LocalPCA.m, NearestNeighbors/
+%
+% originally written by Hau-tieng Wu 2011-06-28
+% last modified by Tingran Gao (trgao10@math.duke.edu) 2014-06-24
+%
+
+%%% indispensible input fields
+if ~isfield(vdm, 'epsilon')
+    error('missing field "epsilon" from input');
+end
+if ~isfield(vdm, 'NN')
+    error('missing field "NN" from input');
+end
+
+vdm.alpha         = getoptions(vdm, 'alpha', 1);
+vdm.delta         = getoptions(vdm, 'delta', 0.9);
+vdm.T             = getoptions(vdm, 'T', 2);
+vdm.symmetrize    = getoptions(vdm, 'symmetrize', 0);
+vdm.debug         = getoptions(vdm, 'debug', 0);
+vdm.embedmaxdim   = getoptions(vdm, 'embedmaxdim', 100);
+
+if vdm.debug==1
+    fprintf('\n(DEBUG:VDM)\t\tStart to work on Vector Diffusion Map\n');
+end
+
+eigopt.isreal = 1;
+eigopt.issym  = 1;
+eigopt.maxit  = 3000;
+eigopt.disp   = 0;
+
+%%% number of data points set to "nn"
+nn = size(vdm.data,2);
+
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+% Step 1: Nearest Neighbor Search
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+if vdm.debug==1
+    fprintf('(DEBUG:VDM) Step 1: NN search and Data preparation.\n');
+end
+
+atria = nn_prepare(vdm.data');
+[index,distance] = nn_search(vdm.data',atria,(1:nn)',vdm.NN,-1,0.0);
+
+if vdm.debug==1
+    fprintf(['(DEBUG:VDM) NN=',num2str(vdm.NN),'\n']);
+    fprintf(['(DEBUG:VDM) minimal farthest distance=',num2str(min(distance(:,end))),'\n']);
+    fprintf(['(DEBUG:VDM) maximal farthest distance=',num2str(max(distance(:,end))),'\n']);
+    fprintf(['(DEBUG:VDM) median farthest distance=',num2str(median(distance(:,end))),'\n']);
+    fprintf(['(DEBUG:VDM) 1.5*sqrt(min farthest distance)=',num2str(1.5*sqrt(min(distance(:,end)))),'.\n']);
+    fprintf(['(DEBUG:VDM) 1.5*sqrt(max farthest distance)=',num2str(1.5*sqrt(max(distance(:,end)))),'.\n']);
+    fprintf(['(DEBUG:VDM) 1.5*sqrt(median farthest distance)=',num2str(1.5*sqrt(median(distance(:,end)))),'.\n']);
+end
+
+%%% patchno is set to convert the NN information to the \sqrt{h} information
+patchno = vdm.NN*ones(1,nn);
+
+if vdm.debug==1
+    fprintf('(DEBUG:VDM) neighbor points with kernel value less than exp(-5*1.5^2) are trimmed.\n');
+end
+
+for ii=1:nn
+    patchno(ii) = sum(distance(ii,:) <= 1.5*sqrt(vdm.epsilon));
+    distance(ii, distance(ii,:) > 1.5*sqrt(vdm.epsilon)) = Inf;
+end
+
+distance = distance(:, 1:max(patchno));
+index = index(:, 1:max(patchno));
+rslt.patchno = patchno; rslt.distance = distance; rslt.index = index;
+
+NN = max(patchno); %% NN is the finally picked number of nearest neighbors
+
+if vdm.debug==1
+    if (quantile(patchno,0.9) == vdm.NN)
+        %%% it means the NN is not big enough so that the decay of the
+        %%% kernel won't be fast enough for the error to be small
+        fprintf('(DEBUG:VDM:WARNING) the NN should be chosen larger\n');
+    end
+    
+    fprintf(['(DEBUG:VDM) the number of points with distance less then\n']);
+    fprintf(['           1.5*sqrt(epsilon)=' num2str(1.5*sqrt(vdm.epsilon)) ...
+        ' is (min,max,median) = (' num2str(min(patchno)) ',' ...
+        num2str(max(patchno)) ',' num2str(median(patchno)) ')\n']);
+    fprintf(['(DEBUG:VDM) set NN to be ',num2str(max(patchno)),'\n']);
+end
+
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+% Step 2: Local PCA
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+if vdm.debug
+    fprintf('(DEBUG:VDM) Step 2: find a basis for each tangent plane by PCA\n');
+end
+
+lpca.data      = vdm.data;
+%%% (CAUTION) theoretically, it should be vdm.epsilon^((D+4)/(D+1))
+%%% BUT we don't know the dimension D yet!
+%%% throw a random guess instead...
+guess = 0.8;
+lpca.epsilonpca= vdm.epsilon*guess;
+lpca.NN        = NN;
+lpca.index     = rslt.index;
+lpca.distance  = rslt.distance;
+lpca.patchno   = patchno;
+%%% lpca.KN is the threshold number gamma chosen by the user in local PCA.
+%%% by default choose 0.9
+lpca.KN        = 0.9;
+lpca.debug     = 1;
+
+[pcaBASIS, D]  = LocalPCA(lpca);
+rslt.pcaBASIS = pcaBASIS;
+clear lpca
+
+
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+% Step 3: Resolving Reflection
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+if vdm.debug==1
+    fprintf('(DEBUG:VDM) Step 3: deal with the reflection effect\t\t');
+end
+
+IdxI = zeros(nn*NN,1);
+IdxJ = zeros(nn*NN,1);
+Vals = zeros(nn*NN,1);
+
+cback = 0;
+for ii=1:nn
+    for cc=1:cback
+        fprintf('\b');
+    end
+    cback = fprintf('%4d',ii);
+    
+    IdxI((ii-1)*NN+1) = ii;
+    IdxJ((ii-1)*NN+1) = ii;
+    Vals((ii-1)*NN+1) = 1;
+    
+    for kk = 2:NN
+        jj = index(ii,kk);	%% ii and jj are indices of points
+        
+        IdxI((ii-1)*NN+kk) = ii;
+        IdxJ((ii-1)*NN+kk) = jj;
+        
+        Ai = pcaBASIS(:,1:D,ii);
+        Aj = pcaBASIS(:,1:D,jj);
+        H  = Ai'*Aj;
+        [U, ~, V] = svd(H);
+        X1 = V*U';
+        
+        if det(X1)<0
+            Vals((ii-1)*NN+kk) = -1;
+        else
+            Vals((ii-1)*NN+kk) = 1;
+        end
+    end
+end
+fprintf('\n');
+
+clear U V lambda X1
+
+REFLECTION = sparse(IdxI,IdxJ,Vals);
+[UR, ~] = eigs(sparse(REFLECTION),2,'lm',eigopt);
+
+%%% make all frames coincide with SO(D)
+refIdx = find(UR(ii,1)<0);
+pcaBASIS(:,1,refIdx) = -pcaBASIS(:,1,refIdx);
+
+
+clear UR lambdaR REFLECTION
+rslt.pcaBASIS  = pcaBASIS;
+
+%+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+%%% symmetrize the graph
+if vdm.symmetrize==1
+    if vdm.debug==1
+        fprintf('(DEBUG:VDM) Step 4'': symmetrize the graph (very time consuming)\t\t');
+    end
+    count = 0;
+    cback = 0;
+    for ii=1:nn
+        for cc=1:cback
+            fprintf('\b');
+        end
+        cback = fprintf('%4d',ii);
+        
+        for kk=2:NN
+            jj = index(ii,kk);
+            if ~ismember(ii,index(jj,:))
+                distance(ii,kk) = Inf;
+                count = count+1;
+            end
+        end
+    end
+    
+    if vdm.debug==1
+        fprintf(['\n(DEBUG:VDM) removed entries=',num2str(100*count./(size(distance,1)*size(distance,2))),'%%\n\n']);
+    end
+end
+clear count;
+
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+% Step 4: Construct Connection Laplacian
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+if vdm.debug==1
+    fprintf('(DEBUG:vDM) Step 4: Connection Laplacian operator\t\t');
+end
+
+%%% build up the matrix S=D^{-1}A
+Ac = zeros(D*NN,D*nn);
+Dc = zeros(D*nn,1);
+epsilon = vdm.epsilon;
+
+cback=0;
+for ii=1:nn
+    for cc=1:cback
+        fprintf('\b');
+    end
+    cback = fprintf('%4d',ii);
+    
+    pii = sum(exp(-5*(distance(ii,:).^2/epsilon)))^vdm.alpha;
+    W2i = 0;
+    
+    for kk = 1:NN
+        jj = index(ii,kk);
+        
+        %%% use Gaussian kernel exp(-5t^2)
+        Kij = exp(-5*(distance(ii,kk).^2/epsilon));
+        pjj = sum(exp(-5*(distance(jj,:).^2/epsilon)))^vdm.alpha;
+        
+        Kij2 = Kij./(pii*pjj);
+        
+        W2i = W2i+Kij2;
+        
+        Ai = pcaBASIS(:,1:D,ii);
+        Aj = pcaBASIS(:,1:D,jj);
+        H = Ai'*Aj;
+        [U,~,V] = svd(H);
+        X1 = V*U';
+        
+        Ac((kk-1)*D+1:kk*D, (ii-1)*D+1:ii*D) = X1*Kij2; 
+    end
+    Dc((ii-1)*D+1:ii*D) = W2i;
+end
+
+fprintf('\n');
+
+%%% preparation for the construction of the Connection Laplace.
+%%% The above is the preparation for its heat kernel.
+if (isfield(vdm,'Nabla2') && (vdm.Nabla2==1))
+    if vdm.debug==1
+        fprintf('(DEBUG:vDM) Get Connection Laplacian...\n');
+    end
+    Cc = Ac;
+    for ii=1:nn
+        Cc(1:D,(ii-1)*D+1:ii*D) = (1/vdm.epsilon)*Ac(1:D,(ii-1)*D+1:ii*D)-diag(ones(D,1));
+    end
+end
+
+%%% the following code are used to get the sparse matrix for either the
+%%% connection Laplacian or its heat kernel
+I = repmat(1:D*nn, D*NN, 1);
+J = zeros(D*NN,D*nn);
+for ii=1:nn
+    H = zeros(D*NN,1);
+    for jj=1:NN
+        kk = index(ii,jj);
+        H((jj-1)*D+1:jj*D) = (kk-1)*D+1:kk*D;
+    end
+    for jj=1:D
+        J(:,(ii-1)*D+jj) = H;
+    end
+end
+
+%%% get A for the heat kernel
+sparseA = sparse(I(:),J(:),Ac(:),D*nn,D*nn,D*NN*D*nn);
+
+%%% get A for connection Laplacian
+if (isfield(vdm,'Nabla2') && (vdm.Nabla2 == 1))
+    sparseC = sparse(I(:),J(:),Cc(:),D*nn,D*nn,D*NN*D*nn);
+end
+
+clear Ac Cc I J H REFLECTION
+
+%%% get D^{-1/2}
+I = 1:D*nn;
+sparseD = sparse(I(:),I(:),1./Dc,D*nn,D*nn,D*nn);
+
+%%% get \tilde{S}=D^{-1/2}AD^{-1/2}, which is similar to S (for heat kernel)
+sparseS = sqrt(sparseD)*sparseA*sqrt(sparseD);
+
+%%% symmetrize sparseS
+%%% not quite necessary due to the constructoin, but helps with numerics
+sparseS = (sparseS+sparseS')/2;
+rslt.sparseS = sparseS;
+
+%%% get S=D^{-1}A, which the true heat kernel
+if (isfield(vdm,'Nabla2') && (vdm.Nabla2==1))
+    sparseC = sparseD*sparseC;
+    Delta = sparseC - eye(size(sparseC,1));
+    Delta(abs(Delta)<1e-8)=0;
+    rslt.Delta = Delta;
+    expDelta  = expm(Delta);
+    rslt.expDelta = expm(rslt.sparseDelta);
+end
+
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+% Step 5: Spectral Decomposition
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+if vdm.debug==1
+    fprintf('(DEBUG:VDM) step 5: find eigenvalues of the connection Laplacian operator\n');
+end
+
+%%% heavy-lifting eigen-decomposition of the heat kernel
+[US,lambdaS]	   = eigs(sparseS, vdm.embedmaxdim, 'lm', eigopt);
+lambdaS		       = diag(lambdaS);
+[lambdaS, sortidx] = sort(lambdaS, 'descend');
+US = US(:, sortidx);	%% these are the eigenvectors for \tilde{S}
+US = sqrt(sparseD)*US;	%% these are the eigenvectors for S
+
+rslt.US = US;
+rslt.lambdaS = lambdaS;
+clear US lambdaS sparseS
+
+%%% for connection laplacian
+if (isfield(vdm,'Nabla2') && (vdm.Nabla2==1))
+    [UC,lambdaC] = eigs(sparseC, vdm.embedmaxdim, 'sm', eigopt);
+    lambdaC      = -4*real(diag(lambdaC))-(D-1);
+    rslt.lambdaC = lambdaC;
+    rslt.UC	 = UC;
+end
+clear UC lambdaC sparseC
+
+if vdm.debug==1
+    figure;
+    bar(1-rslt.lambdaS);
+    title(['(DEBUG) the first ' num2str(vdm.embedmaxdim) ' eigenvalues\newline(note the scale)']);
+    axis tight;
+end
+
+if vdm.debug==1
+    fprintf(['(DEBUG:VDM) The diffusion time T=',num2str(vdm.T),', and the threshold is ',num2str(vdm.delta),'\n']);
+end
+
+dimidx = find((rslt.lambdaS./rslt.lambdaS(1)).^(2*vdm.T) > vdm.delta);
+dimno = length(dimidx);
+rslt.embeddim = dimno*(dimno+1)./2;
+
+fprintf(['\t\tVector diffusion map will embed the dataset into ',num2str(rslt.embeddim),'-dim Euclidean space\n\n']);
+
+end
