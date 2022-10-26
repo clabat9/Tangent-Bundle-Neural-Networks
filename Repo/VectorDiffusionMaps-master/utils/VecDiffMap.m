@@ -318,7 +318,7 @@ if (isfield(vdm,'Nabla2') && (vdm.Nabla2==1))
     Delta = sparseC - eye(size(sparseC,1));
     Delta(abs(Delta)<1e-7)=0;
     rslt.Delta = Delta;
-    expDelta  = expm(-Delta);
+    expDelta  = expm(Delta);
     expDelta(abs(Delta)<1e-7)=0;
     rslt.expDelta = expDelta;
 end
