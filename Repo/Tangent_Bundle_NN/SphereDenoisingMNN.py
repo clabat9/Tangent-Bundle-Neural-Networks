@@ -132,7 +132,7 @@ useGPU = False# If true, and GPU is available, use it.
 
 nDataSplits = 5 # Number of data realizations
 nNoiseSplits = 5 # Number of noise realizations --> Total Num. of experiments = nDataSplits*nNoiseSplits
-sigma_noise = 5e-2 # Noise variance
+sigma_noise =  1e-1 # Noise variance
 
 
 ############
@@ -380,13 +380,13 @@ for nPoints in [200,800]:
             # Loads the Cloud Laplacian, its Exp and the specific data realization
             #SLaplacian = pd.read_csv('/home/claudio/Dropbox/VectorDiffusionMaps-master/data/data_samples_'+str(nPoints)+'_realization_'\
                                   #+str(split)+'/Laplacian.csv',header = None).to_numpy()
-            SLaplacian = pd.read_csv('/home/claudio/Dropbox/VectorDiffusionMaps-master/data/data_samples_'+str(nPoints)+'_realization_'\
+            SLaplacian = pd.read_csv('/home/claudio/Desktop/Tangent-Bundle-Neural-Networks-main/Repo/VectorDiffusionMaps-master/data/data_samples_'+str(nPoints)+'_realization_'\
                                   +str(split+1)+'/expLaplacian.csv',header = None).to_numpy()
             [lambdas,_] = np.linalg.eigh(SLaplacian)
             SLaplacian = SLaplacian/np.max(np.real(lambdas))
-            data_np = pd.read_csv('/home/claudio/Dropbox/VectorDiffusionMaps-master/data/data_samples_'+str(nPoints)+'_realization_'\
+            data_np = pd.read_csv('/home/claudio/Desktop/Tangent-Bundle-Neural-Networks-main/Repo/VectorDiffusionMaps-master/data/data_samples_'+str(nPoints)+'_realization_'\
                                   +str(split+1)+'/Data.csv',header = None).to_numpy()
-            train_np = pd.read_csv('/home/claudio/Dropbox/VectorDiffusionMaps-master/data/data_samples_'+str(nPoints)+'_realization_'\
+            train_np = pd.read_csv('/home/claudio/Desktop/Tangent-Bundle-Neural-Networks-main/Repo/VectorDiffusionMaps-master/data/data_samples_'+str(nPoints)+'_realization_'\
                                   +str(split+1)+'/Data_sd_'+str(sigma_noise)+'_nrel_'+str(rel+1)+'.csv',header = None).to_numpy()
             train_np=np.expand_dims(train_np,0)
             # Data Object Instatiating 

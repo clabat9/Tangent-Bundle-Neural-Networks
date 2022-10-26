@@ -139,7 +139,7 @@ useGPU = True# If true, and GPU is available, use it.
 nDataSplits = 5 # Number of data realizations
 nNoiseSplits = 5 # Number of noise realizations --> Total Num. of experiments = nDataSplits*nNoiseSplits
 dhat = 2 # Estimated underlying manifold dimension
-sigma_noise = 5e-2 #5e-2 # Noise variance
+sigma_noise = 1e-1 #5e-2 # Noise variance
 sample_percentage = 1 # The sampling mask is generated with P(retain_sample)=sample_percentage
 
 
@@ -402,18 +402,18 @@ for nPoints in [200,800]: # The Available Data are for 200, 800 and 1200. Of cou
             # Loads the Sheaf Laplacian (Delta_n), the Laplacian, their Exp and the specific data realization
             #SLaplacian = pd.read_csv('/home/claudio/Dropbox/VectorDiffusionMaps-master/data/data_samples_'+str(nPoints)+'_realization_'\
                                   #+str(split)+'/SLaplacian.csv',header = None).to_numpy()
-            SLaplacian = pd.read_csv('/home/claudio/Dropbox/VectorDiffusionMaps-master/data/data_samples_'+str(nPoints)+'_realization_'\
+            SLaplacian = pd.read_csv('/home/claudio/Desktop/Tangent-Bundle-Neural-Networks-main/Repo/VectorDiffusionMaps-master/data/data_samples_'+str(nPoints)+'_realization_'\
                                   +str(split+1)+'/expSLaplacian.csv',header = None).to_numpy()
             [lambdas,_] = np.linalg.eigh(SLaplacian)
             SLaplacian = SLaplacian/np.max(np.real(lambdas))
-            data_np = pd.read_csv('/home/claudio/Dropbox/VectorDiffusionMaps-master/data/data_samples_'+str(nPoints)+'_realization_'\
+            data_np = pd.read_csv('/home/claudio/Desktop/Tangent-Bundle-Neural-Networks-main/Repo/VectorDiffusionMaps-master/data/data_samples_'+str(nPoints)+'_realization_'\
                                   +str(split+1)+'/projData.csv',header = None).to_numpy()
             sampling_mask = np.kron(np.ones((1,dhat)),np.expand_dims(np.random.binomial\
                                                                      (1, sample_percentage, size=nPoints),1)).flatten() # Sampling Mask
             # Defines the training set as the masked signals and adds noise
             train_indices =(np.arange(1, nPoints*dhat+1)*sampling_mask-1).astype(int)
             test_indices = np.arange(0,nPoints*dhat)[train_indices == -1]#np.delete(np.arange(0, nPoints),train_indices)
-            train_np = pd.read_csv('/home/claudio/Dropbox/VectorDiffusionMaps-master/data/data_samples_'+str(nPoints)+'_realization_'\
+            train_np = pd.read_csv('/home/claudio/Desktop/Tangent-Bundle-Neural-Networks-main/Repo/VectorDiffusionMaps-master/data/data_samples_'+str(nPoints)+'_realization_'\
                                   +str(split+1)+'/projData_sd_'+str(sigma_noise)+'_nrel_'+str(rel+1)+'.csv',header = None).to_numpy()
             train_indices_torch = torch.from_numpy(np.expand_dims(train_indices[train_indices != -1],1).T).to('cuda:0' if (useGPU and torch.cuda.is_available()) \
                                              else 'cpu')
