@@ -27,7 +27,7 @@ The code is commented and it is ready to run  (with data and Laplacians director
 
 ## Comments
 
-This is a preliminary work whose main content is theoretical and methodological. We are planning to extend it and, for this reason, we expect to improve the code, design more complex experiments and validations, and implement the VDM procedure in Python to have a better control on the procedure and better computational performance. As a result, the actual code and pipeline could be for sure improved, but we believe it is simple and readable at this stage.
+This is a preliminary work whose main content is theoretical and methodological. We are planning to extend it and, for this reason, we expect to improve the code, design more complex experiments and validations, and implement the VDM procedure in Python and the TNN architecture in Pytorch Geometric to have a better control on the procedure and better computational performance. As a result, the actual code and pipeline could be for sure improved, but we believe it is simple and readable at this stage.
 
 ## Files description
 
