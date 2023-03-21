@@ -45,7 +45,7 @@ The code is commented and it is ready to run  (with data and Laplacians director
 
 ## Files description
 
-1. __`data`__: This folder contains the windfields data.
+1. __`data`__: The windfields data used for the experiments are available at https://drive.google.com/file/d/1VXAO7soE6HKG2Z7ReAD4TVDf1iARvF8c/view?usp=sharing
 
 2. __`results`__: 
 	This folders contains the pickles of the results showed in the paper.
@@ -65,7 +65,7 @@ The code is commented and it is ready to run  (with data and Laplacians director
 7. __`utils.py`__: 
   	This python script contains various functions, among which the ones used to build the cloud and sheaf Laplacians.
 
-**2) "Tangent Bundle Filters and Neural Networks: from Manifolds to Celullar Sheaves and Back"** ("Conference Repo" folder)
+**2) "Tangent Bundle Filters and Neural Networks: from Manifolds to Celullar Sheaves and Back"** ("Repo" folder)
 
 ## Abstract
 In this work we introduce a convolution operation over the tangent bundles of Riemann manifolds starting from a (vector) heat diffusion process controlled by the Connection Laplacian operator. We exploit the convolution to define tangent bundle filters  and tangent bundle neural networks (TNNs), novel continuous architectures operating on tangent bundle-structured data. We then discretize TNNs both in space and time domains, showing that their discrete counterpart is a generalization of the recently introduced Sheaf Neural Networks. We formally prove that this discrete architecture converges to the underlying continuous TNN. Finally, we numerically evaluate the effectiveness of the proposed architecture on a denoising task of a tangent vector field of the unit 2-sphere.
