@@ -1,7 +1,9 @@
 # Tangent Bundle Neural Networks
-This repo contains the code used for implementing the numerical results in the paper: 
+This repo contains the code used for implementing the numerical results in the papers: 
 
-**"Tangent Bundle Neural Networks: from Manifolds to Celullar Sheaves and Back"**
+**"Tangent Bundle Filters and Neural Networks: from Manifolds to Celullar Sheaves and Back"** (preliminary conference)
+
+**"Tangent Bundle Convolutional Learning: from Manifolds to Celullar Sheaves and Back"** (extended journal paper)
 
 *C. Battiloro (1,2) , Z.Wang (1), H. Riess (3), A. Ribeiro (1), P. Di Lorenzo (2)*
 
@@ -14,6 +16,48 @@ This repo contains the code used for implementing the numerical results in the p
 <p align="center">
 	<img src="https://github.com/clabat9/Tangent-Bundle-Neural-Networks/blob/main/sphere_ex_cropped.jpg?raw=true" alt="drawing" width="400"/>
 </p>
+
+**"Tangent Bundle Convolutional Learning: from Manifolds to Celullar Sheaves and Back"**
+
+## Abstract
+ In this work we introduce a convolution operation over the tangent bundle of
+Riemann manifolds in terms of exponentials of the Connection Laplacian
+operator. We define tangent bundle filters and tangent bundle neural networks
+(TNNs) based on this convolution operation, which are novel continuous
+architectures operating on tangent bundle signals, i.e. vector fields over the
+manifolds. Tangent bundle filters admit a spectral representation that
+generalizes the ones of scalar manifold filters, graph filters and standard
+convolutional filters in continuous time. We then introduce a discretization
+procedure, both in the space and time domains, to make TNNs implementable,
+showing that their discrete counterpart is a novel principled variant of the
+very recently introduced sheaf neural networks. We formally prove that this
+discretized architecture converges to the underlying continuous TNN. Finally,
+we numerically evaluate the effectiveness of the proposed architecture on
+various learning tasks, both on synthetic and real data.
+
+## Summary
+The implementation of the architecture is performed using PyTorch.
+
+The code is commented and it is ready to run  (with data and Laplacians directories to be specified on local machines). For any questions, comments or suggestions, please e-mail Claudio Battiloro at claudio.battiloro@uniroma1.it and/or  Zhiyang Wang at zhiyangw@seas.upenn.edu. 
+
+
+## Files description
+
+1. __`VectorDiffusionMaps-master`__: This folder contains the implementation of the Vector Diffusion Maps algorithm. We invite to visit the VDM repo of trgao10 or Wu's homepage for further details.
+
+2. __`SphereDenoisingDDTNN.py`__: 
+	This python script contains the implementation of the DD-TNN architecture and the computation of the corresonding results.
+  
+3. __`SphereDenoisingMNN.py`__: 
+	This python script contains the implementation of the MNN architecture from [2] and the computation of the corresonding results.
+  
+4. __`Experiments`__: 
+	This folder contains the experiments logs (as explained in the scripts), e.g. results, seeds, best architectures,...
+  
+5. __`alegnnss`__: 
+  This folder contains the "alegnn" library with some modifications.
+
+**"Tangent Bundle Filters and Neural Networks: from Manifolds to Celullar Sheaves and Back"**
 
 ## Abstract
 In this work we introduce a convolution operation over the tangent bundles of Riemann manifolds starting from a (vector) heat diffusion process controlled by the Connection Laplacian operator. We exploit the convolution to define tangent bundle filters  and tangent bundle neural networks (TNNs), novel continuous architectures operating on tangent bundle-structured data. We then discretize TNNs both in space and time domains, showing that their discrete counterpart is a generalization of the recently introduced Sheaf Neural Networks. We formally prove that this discrete architecture converges to the underlying continuous TNN. Finally, we numerically evaluate the effectiveness of the proposed architecture on a denoising task of a tangent vector field of the unit 2-sphere.
