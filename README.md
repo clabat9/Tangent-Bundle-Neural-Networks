@@ -1,9 +1,11 @@
 # Tangent Bundle Neural Networks
 This repo contains the code used for implementing the numerical results in the papers: 
 
-**"Tangent Bundle Filters and Neural Networks: from Manifolds to Celullar Sheaves and Back"** (preliminary conference)
+**1) "Tangent Bundle Convolutional Learning: from Manifolds to Celullar Sheaves and Back"** (extended journal paper)
 
-**"Tangent Bundle Convolutional Learning: from Manifolds to Celullar Sheaves and Back"** (extended journal paper)
+**2) "Tangent Bundle Filters and Neural Networks: from Manifolds to Celullar Sheaves and Back"** (preliminary conference)
+
+
 
 *C. Battiloro (1,2) , Z.Wang (1), H. Riess (3), A. Ribeiro (1), P. Di Lorenzo (2)*
 
@@ -17,7 +19,7 @@ This repo contains the code used for implementing the numerical results in the p
 	<img src="https://github.com/clabat9/Tangent-Bundle-Neural-Networks/blob/main/sphere_ex_cropped.jpg?raw=true" alt="drawing" width="400"/>
 </p>
 
-**"Tangent Bundle Convolutional Learning: from Manifolds to Celullar Sheaves and Back"**
+**1) "Tangent Bundle Convolutional Learning: from Manifolds to Celullar Sheaves and Back"**
 
 ## Abstract
  In this work we introduce a convolution operation over the tangent bundle of
@@ -43,21 +45,27 @@ The code is commented and it is ready to run  (with data and Laplacians director
 
 ## Files description
 
-1. __`VectorDiffusionMaps-master`__: This folder contains the implementation of the Vector Diffusion Maps algorithm. We invite to visit the VDM repo of trgao10 or Wu's homepage for further details.
+1. __`data`__: This folder contains the windfields data.
 
-2. __`SphereDenoisingDDTNN.py`__: 
-	This python script contains the implementation of the DD-TNN architecture and the computation of the corresonding results.
+2. __`results`__: 
+	This folders contains the pickles of the results showed in the paper.
   
-3. __`SphereDenoisingMNN.py`__: 
-	This python script contains the implementation of the MNN architecture from [2] and the computation of the corresonding results.
+3. __`mainTorusDenoising.py`__, __`mainWindSampling.py`__, __`mainWindPrediction.py`__: 
+	These python scripts are the main scripts to reproduce the experiments of the paper, it is suffiecient to run them.
   
-4. __`Experiments`__: 
-	This folder contains the experiments logs (as explained in the scripts), e.g. results, seeds, best architectures,...
+4. __`layers.py`__: 
+	This python script contains the DD-TNNs and MNNs layers implementation.
+	
+5. __`layers.py`__: 
+	This python script contains the DD-TNNs and MNNs architecture implementation.
   
-5. __`alegnnss`__: 
-  This folder contains the "alegnn" library with some modifications.
+6. __`data_utils.py`__: 
+  	This python script contains Torch Dataset Classes used for the experiments.
+	
+7. __`utils.py`__: 
+  	This python script contains various functions, among which the ones used to build the cloud and sheaf Laplacians.
 
-**"Tangent Bundle Filters and Neural Networks: from Manifolds to Celullar Sheaves and Back"**
+**2) "Tangent Bundle Filters and Neural Networks: from Manifolds to Celullar Sheaves and Back"**
 
 ## Abstract
 In this work we introduce a convolution operation over the tangent bundles of Riemann manifolds starting from a (vector) heat diffusion process controlled by the Connection Laplacian operator. We exploit the convolution to define tangent bundle filters  and tangent bundle neural networks (TNNs), novel continuous architectures operating on tangent bundle-structured data. We then discretize TNNs both in space and time domains, showing that their discrete counterpart is a generalization of the recently introduced Sheaf Neural Networks. We formally prove that this discrete architecture converges to the underlying continuous TNN. Finally, we numerically evaluate the effectiveness of the proposed architecture on a denoising task of a tangent vector field of the unit 2-sphere.
