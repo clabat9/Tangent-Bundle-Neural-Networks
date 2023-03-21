@@ -7,7 +7,7 @@ This repo contains the code used for implementing the numerical results in the p
 
 
 
-*C. Battiloro (1,2) , Z.Wang (1), H. Riess (3), A. Ribeiro (1), P. Di Lorenzo (2)*
+*C. Battiloro (1,2) , Z.Wang (1), H. Riess (3), P. Di Lorenzo (2), A. Ribeiro (1)*
 
 (1) ESE Department, University of Pennsylvania, Philadelphia, USA 
 
