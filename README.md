@@ -19,7 +19,7 @@ This repo contains the code used for implementing the numerical results in the p
 	<img src="https://github.com/clabat9/Tangent-Bundle-Neural-Networks/blob/main/sphere_ex_cropped.jpg?raw=true" alt="drawing" width="400"/>
 </p>
 
-**1) "Tangent Bundle Convolutional Learning: from Manifolds to Celullar Sheaves and Back"**
+**1) "Tangent Bundle Convolutional Learning: from Manifolds to Celullar Sheaves and Back"** ("Journal Repo" folder)
 
 ## Abstract
  In this work we introduce a convolution operation over the tangent bundle of
@@ -65,7 +65,7 @@ The code is commented and it is ready to run  (with data and Laplacians director
 7. __`utils.py`__: 
   	This python script contains various functions, among which the ones used to build the cloud and sheaf Laplacians.
 
-**2) "Tangent Bundle Filters and Neural Networks: from Manifolds to Celullar Sheaves and Back"**
+**2) "Tangent Bundle Filters and Neural Networks: from Manifolds to Celullar Sheaves and Back"** ("Conference Repo" folder)
 
 ## Abstract
 In this work we introduce a convolution operation over the tangent bundles of Riemann manifolds starting from a (vector) heat diffusion process controlled by the Connection Laplacian operator. We exploit the convolution to define tangent bundle filters  and tangent bundle neural networks (TNNs), novel continuous architectures operating on tangent bundle-structured data. We then discretize TNNs both in space and time domains, showing that their discrete counterpart is a generalization of the recently introduced Sheaf Neural Networks. We formally prove that this discrete architecture converges to the underlying continuous TNN. Finally, we numerically evaluate the effectiveness of the proposed architecture on a denoising task of a tangent vector field of the unit 2-sphere.
