@@ -40,12 +40,12 @@ various learning tasks, both on synthetic and real data.
 ## Summary
 The implementation of the architecture is performed using PyTorch.
 
-The code is commented and it is ready to run  (with data and Laplacians directories to be specified on local machines). For any questions, comments or suggestions, please e-mail Claudio Battiloro at claudio.battiloro@uniroma1.it and/or  Zhiyang Wang at zhiyangw@seas.upenn.edu. 
+The code is commented and it is ready to run  (with data and Laplacians directories to be specified on local machines). For any questions, comments or suggestions, please e-mail Claudio Battiloro at claudio_battiloro@brown.edu and/or  Zhiyang Wang at zhiyangw@seas.upenn.edu. 
 
 
 ## Files description
 
-1. __`data`__: The windfields data used for the experiments are available at https://drive.google.com/file/d/1VXAO7soE6HKG2Z7ReAD4TVDf1iARvF8c/view?usp=sharing
+1. __`data`__: The windfields data used for the experiments are available at https://drive.google.com/drive/folders/19jxAbg0M7bhuS0ik0DZ2GdFr3slWjK9a?usp=sharing
 
 2. __`results`__: 
 	This folders contains the pickles of the results showed in the paper.
